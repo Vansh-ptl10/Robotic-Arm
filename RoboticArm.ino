@@ -1,22 +1,22 @@
-#include <Servo.h>  // Include the Servo library
+#include <Servo.h>  
 
-Servo servo1;      // Servo object for the arm (opening/closing)
+Servo servo1;      
 Servo servo2;
 Servo servo3;
 Servo servo4;
 
-char input;        // Single variable for input (global for reuse)
-int pos1 = 0;      // Track current servo position
+char input;        
+int pos1 = 0;      
 int pos2 = 90;
 int pos3 = 90;
 int pos4 = 90;
 
 void setup() {
-  servo1.attach(6);  // Attach to pin 6
-  servo2.attach(9);  // Attach to pin 9
-  servo3.attach(10); // Attach to pin 10
-  servo4.attach(11); // Attach to pin 11
-  Serial.begin(9600);  // Initialize serial communication
+  servo1.attach(6);  
+  servo2.attach(9);  
+  servo3.attach(10); 
+  servo4.attach(11); 
+  Serial.begin(9600);  
 
   servo1.write(pos1);
   servo2.write(pos2);
@@ -27,7 +27,7 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {  // Check if data is available
     input = Serial.read();       // Read the incoming byte
-    input = tolower(input);      // Case-insensitive
+    input = tolower(input);      
 
     // Closing
     if (input == 'c') {
@@ -116,7 +116,7 @@ void loop() {
       }
       Serial.println("Movement complete (or stopped).");
     }
-    // Down
+    // Up
     else if (input == 'u'){
       Serial.println("moving up..");
       for(; pos3 >= 0; pos3 -= 1){
@@ -133,7 +133,7 @@ void loop() {
       }
       Serial.println("Movement complete (or stopped)");
     }
-
+    // Backward
     else if (input == 'b'){
       Serial.println("moving ...");
       for (; pos4 <= 180; pos4 += 1){
@@ -150,7 +150,7 @@ void loop() {
       }
       Serial.println("Movement complete (or stopped).");
     }
-    // Down
+    // Forward
     else if (input == 'f'){
       Serial.println("moving up..");
       for(; pos4 >= 0; pos4 -= 1){
